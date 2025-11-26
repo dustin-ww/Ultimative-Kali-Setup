@@ -1,0 +1,61 @@
+# tmux Configuration
+# ==================
+
+# Ctrl+Alt+d for vertical split (split window downwards)
+bind-key -n C-M-d split-window -v
+
+# Ctrl+Alt+r for horizontal split (split window to the side)
+bind-key -n C-M-r split-window -h
+
+# Additional useful settings
+# ---------------------------
+
+# Enable mouse support
+set -g mouse on
+
+# Start window numbering at 1 (instead of 0)
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Automatically renumber windows
+set -g renumber-windows on
+
+# Longer history
+set -g history-limit 10000
+
+# Faster command sequences (reduces escape delay)
+set -s escape-time 0
+
+# Visual notifications
+setw -g monitor-activity on
+set -g visual-activity off
+
+# Status bar design
+set -g status-style bg=black,fg=white
+set -g status-left-length 30
+set -g status-right-length 60
+set -g status-left '[#S] '
+set -g status-right '#[fg=yellow]#(whoami)@#H #[fg=white]| %H:%M %d-%b-%y'
+
+# Highlight active window
+setw -g window-status-current-style bg=blue,fg=white,bold
+
+# Pane navigation with Alt+Arrow keys
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
+
+# Resize panes with Ctrl+Arrow keys
+bind-key -n C-Left resize-pane -L 5
+bind-key -n C-Right resize-pane -R 5
+bind-key -n C-Up resize-pane -U 5
+bind-key -n C-Down resize-pane -D 5
+
+# Reload config with Prefix + r
+bind r source-file ~/.tmux.conf \; display "Config reloaded!"
+
+# Open new windows in current path
+bind c new-window -c "#{pane_current_path}"
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"

@@ -6,7 +6,7 @@ all:
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   hosts:
     kali:
-      ansible_host: 192.168.178.42
+      ansible_host: 127.0.0.1
       ansible_user: kali
       ansible_password: kali
       ansible_become_pass: kali
