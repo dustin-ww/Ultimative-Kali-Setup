@@ -59,3 +59,8 @@ bind r source-file ~/.tmux.conf \; display "Config reloaded!"
 bind c new-window -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
+
+
+# Mouse copy to system clipboard (requires xclip)
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
+bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "xclip -selection clipboard -i"
